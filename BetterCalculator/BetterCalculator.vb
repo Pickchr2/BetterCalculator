@@ -11,18 +11,37 @@ Option Compare Text
 Imports System
 
 Module BetterCalculator
+    Dim userQuits As Boolean = False
     Sub Main(args As String())
-        Dim userQuits As Boolean = False
         Dim userInput As String = ""
+        Dim firstNumber As Integer
+        Dim secondNumber As Integer
+        Dim desiredOperation As String = ""
+        Dim mathResult As Integer
+
         Do Until userQuits = True
-            Console.WriteLine("Please enter two numbers. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit.")
-
-            Select Case userInput
-                Case "Q"
-                    userQuits = True
-                Case Else
-
-            End Select
+            Console.WriteLine("Please enter two whole numbers to perform arithmetic. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit.")
+            firstNumber = AcceptFirstNumber(firstNumber)
         Loop
     End Sub
+
+    Function AcceptFirstNumber(_firstNumber As Integer) As Integer
+        Dim userInput As String
+
+        If userQuits = False Then
+            userInput = Console.ReadLine()
+            Try
+                _firstNumber = CInt(userInput)
+            Catch ex As Exception
+                Select Case userInput
+                    Case "Q"
+                        userQuits = True
+                    Case Else
+                        Console.WriteLine("Sorry, that is not a whole number.")
+                        _firstNumber = AcceptFirstNumber(_firstNumber)
+                End Select
+            End Try
+        End If
+        Return _firstNumber
+    End Function
 End Module
