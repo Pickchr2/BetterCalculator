@@ -2,7 +2,7 @@
 'RCET0265
 'Spring 2023
 'Better Calculator
-'https://github.com/Pickchr/BetterCalculator.Git
+'https://github.com/Pickchr2/BetterCalculator.Git
 
 Option Explicit On
 Option Strict On
