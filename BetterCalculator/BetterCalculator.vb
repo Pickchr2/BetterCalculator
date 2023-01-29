@@ -22,6 +22,7 @@ Module BetterCalculator
         Do Until userQuits = True
             Console.WriteLine("Please enter two whole numbers to perform arithmetic. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit.")
             firstNumber = AcceptFirstNumber(firstNumber)
+            secondNumber = AcceptSecondNumber(secondNumber)
         Loop
     End Sub
 
@@ -29,6 +30,7 @@ Module BetterCalculator
         Dim userInput As String
 
         If userQuits = False Then
+            Console.WriteLine("First number?")
             userInput = Console.ReadLine()
             Try
                 _firstNumber = CInt(userInput)
@@ -43,5 +45,26 @@ Module BetterCalculator
             End Try
         End If
         Return _firstNumber
+    End Function
+
+    Function AcceptSecondNumber(_secondNumber As Integer) As Integer
+        Dim userInput As String
+
+        If userQuits = False Then
+            Console.WriteLine("Second number?")
+            userInput = Console.ReadLine()
+            Try
+                _secondNumber = CInt(userInput)
+            Catch ex As Exception
+                Select Case userInput
+                    Case "Q"
+                        userQuits = True
+                    Case Else
+                        Console.WriteLine("Sorry, that is not a whole number.")
+                        _secondNumber = AcceptSecondNumber(_secondNumber)
+                End Select
+            End Try
+        End If
+        Return _secondNumber
     End Function
 End Module
