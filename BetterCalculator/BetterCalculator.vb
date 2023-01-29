@@ -14,27 +14,27 @@ Module BetterCalculator
     Dim userQuits As Boolean = False
     Sub Main(args As String())
         Dim userInput As String = ""
-        Dim firstNumber As Integer
-        Dim secondNumber As Integer
+        Dim firstNumber As Long
+        Dim secondNumber As Long
         Dim desiredOperation As String = ""
-        Dim mathResult As Integer
 
         Do Until userQuits = True
             Console.WriteLine("Please enter two whole numbers to perform arithmetic. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit.")
             firstNumber = AcceptFirstNumber(firstNumber)
             secondNumber = AcceptSecondNumber(secondNumber)
             desiredOperation = AcceptDesiredOperation(desiredOperation)
+            PerformMath(firstNumber, secondNumber, desiredOperation)
         Loop
     End Sub
 
-    Function AcceptFirstNumber(_firstNumber As Integer) As Integer
+    Function AcceptFirstNumber(_firstNumber As Long) As Long
         Dim userInput As String
 
         If userQuits = False Then
             Console.WriteLine("First number?")
             userInput = Console.ReadLine()
             Try
-                _firstNumber = CInt(userInput)
+                _firstNumber = CLng(userInput)
             Catch ex As Exception
                 Select Case userInput
                     Case "Q"
@@ -48,14 +48,14 @@ Module BetterCalculator
         Return _firstNumber
     End Function
 
-    Function AcceptSecondNumber(_secondNumber As Integer) As Integer
+    Function AcceptSecondNumber(_secondNumber As Long) As Long
         Dim userInput As String
 
         If userQuits = False Then
             Console.WriteLine("Second number?")
             userInput = Console.ReadLine()
             Try
-                _secondNumber = CInt(userInput)
+                _secondNumber = CLng(userInput)
             Catch ex As Exception
                 Select Case userInput
                     Case "Q"
@@ -95,4 +95,41 @@ Module BetterCalculator
         End If
         Return _desiredOperation
     End Function
+
+    Sub PerformMath(_firstNumber As Long, _secondNumber As Long, _desiredOperation As String)
+        Dim mathResult As Decimal
+
+        If userQuits = False Then
+            Select Case _desiredOperation
+                Case "+"
+                    Try
+                        mathResult = _firstNumber + _secondNumber
+                        Console.WriteLine($"{_firstNumber} {_desiredOperation} {_secondNumber} = {mathResult}")
+                    Catch ex As Exception
+                        Console.WriteLine("Result is too large to compute.")
+                    End Try
+                Case "-"
+                    Try
+                        mathResult = _firstNumber - _secondNumber
+                        Console.WriteLine($"{_firstNumber} {_desiredOperation} {_secondNumber} = {mathResult}")
+                    Catch ex As Exception
+                        Console.WriteLine("Result is too large to compute.")
+                    End Try
+                Case "*"
+                    Try
+                        mathResult = _firstNumber * _secondNumber
+                        Console.WriteLine($"{_firstNumber} {_desiredOperation} {_secondNumber} = {mathResult}")
+                    Catch ex As Exception
+                        Console.WriteLine("Result is too large to compute.")
+                    End Try
+                Case "/"
+                    Try
+                        mathResult = CDec(_firstNumber / _secondNumber)
+                        Console.WriteLine($"{_firstNumber} {_desiredOperation} {_secondNumber} = {mathResult}")
+                    Catch ex As Exception
+                        Console.WriteLine("Result is too large to compute.")
+                    End Try
+            End Select
+        End If
+    End Sub
 End Module
