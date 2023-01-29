@@ -23,6 +23,7 @@ Module BetterCalculator
             Console.WriteLine("Please enter two whole numbers to perform arithmetic. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit.")
             firstNumber = AcceptFirstNumber(firstNumber)
             secondNumber = AcceptSecondNumber(secondNumber)
+            desiredOperation = AcceptDesiredOperation(desiredOperation)
         Loop
     End Sub
 
@@ -66,5 +67,32 @@ Module BetterCalculator
             End Try
         End If
         Return _secondNumber
+    End Function
+
+    Function AcceptDesiredOperation(_desiredOperation As String) As String
+        If userQuits = False Then
+            Console.WriteLine("Please choose your desired operation. Enter an option below:")
+            Console.WriteLine("1: +")
+            Console.WriteLine("2: -")
+            Console.WriteLine("3: *")
+            Console.WriteLine("4: /")
+            _desiredOperation = Console.ReadLine()
+            Select Case _desiredOperation
+                Case "Q"
+                    userQuits = True
+                Case "1"
+                    _desiredOperation = "+"
+                Case "2"
+                    _desiredOperation = "-"
+                Case "3"
+                    _desiredOperation = "*"
+                Case "4"
+                    _desiredOperation = "/"
+                Case Else
+                    Console.WriteLine("Not a valid choice.")
+                    _desiredOperation = AcceptDesiredOperation(_desiredOperation)
+            End Select
+        End If
+        Return _desiredOperation
     End Function
 End Module
