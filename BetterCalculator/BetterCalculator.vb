@@ -40,7 +40,7 @@ Module BetterCalculator
                     Case "Q"
                         userQuits = True
                     Case Else
-                        Console.WriteLine("Sorry, that is not a whole number.")
+                        Console.WriteLine($"Sorry, {userInput} is not a whole number.")
                         _firstNumber = AcceptFirstNumber(_firstNumber)
                 End Select
             End Try
@@ -61,7 +61,7 @@ Module BetterCalculator
                     Case "Q"
                         userQuits = True
                     Case Else
-                        Console.WriteLine("Sorry, that is not a whole number.")
+                        Console.WriteLine($"Sorry, {userInput} is not a whole number.")
                         _secondNumber = AcceptSecondNumber(_secondNumber)
                 End Select
             End Try
@@ -89,7 +89,7 @@ Module BetterCalculator
                 Case "4"
                     _desiredOperation = "/"
                 Case Else
-                    Console.WriteLine("Not a valid choice.")
+                    Console.WriteLine($"Sorry, {_desiredOperation} is not a valid choice.")
                     _desiredOperation = AcceptDesiredOperation(_desiredOperation)
             End Select
         End If
